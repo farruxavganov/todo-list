@@ -1,0 +1,133 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before, 
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f1f5f8;
+}
+
+.section-center{
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0px #333;
+}
+.grocery-form {
+    width: 100%;
+}
+.alert {
+    width: 100%;
+    margin: 10px 0;
+    margin-top: 0;
+    text-align: center;
+    padding: 3px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    visibility: hidden;
+    opacity: 0;
+}
+.alert.alert-valid {
+    visibility: visible;
+    opacity: 1;
+    background: #b7e2b7;
+}
+.alert.alert-invalid {
+    visibility: visible;
+    opacity: 1;
+    background: #eb3a3a59;
+}
+.grocery-form h3 {
+    width: 100%;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+    text-align: center;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    color: #333;
+}
+.form-control {
+    width: 100%;
+    display: flex;
+    background-color: #6da4d926;
+    opacity: .9;
+    border-radius: 5px;
+}
+#grocery {
+    padding: 5px;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+}
+
+#grocery:focus {
+    border: 2px solid deepskyblue;
+    border-radius: 5px;
+}
+#grocery::placeholder {
+    color: #333;
+}
+
+.submit-btn {
+    padding: 5px;
+    border: 0;
+    outline: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: dodgerblue;
+    color: #fff;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.grocery-container {
+    width: 100%;
+    margin-top: 10px;
+}
+.grocery-list {
+    width: 100%;
+    height: auto;
+}
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+}
+.item__btn {
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    background-color: transparent;
+}
+.item__btn--edit {
+    color: #43e143;
+}
+.item__btn--trash {
+    color: darkred;
+}
+.clear-btn {
+    outline: 0;
+    border: 0;
+    background-color: transparent;
+    text-transform: capitalize;
+    text-align: center;
+    color: red;
+    width: 100%;
+    margin-top: 15px;
+    cursor: pointer;
+}
