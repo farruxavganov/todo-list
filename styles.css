@@ -31,6 +31,7 @@ body {
 }
 .alert {
     width: 100%;
+    height: 25px;
     margin: 10px 0;
     margin-top: 0;
     text-align: center;
@@ -94,8 +95,14 @@ body {
     cursor: pointer;
 }
 .grocery-container {
+    visibility: hidden;
+    opacity: 0;
     width: 100%;
     margin-top: 10px;
+}
+.grocery-container.show {
+    visibility: visible;
+    opacity: 1;
 }
 .grocery-list {
     width: 100%;
