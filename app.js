@@ -9,6 +9,7 @@ let editElement;
 let editToggel = false;
 let editId = "";
 
+window.addEventListener("DOMContentLoaded", setUpFromLocal);
 form.addEventListener("submit",mainDisplay);
 clearBtn.addEventListener("click", clearItem);
 
@@ -23,8 +24,12 @@ function mainDisplay(e) {
 		validation("create new item","valid");
 		cleanDefault();
 		isShow();
+		addToLocalStorage(value, id);
 	}else if(value && editToggel){
-		console.log(55)
+		editElement.innerHTML = value;
+		validation("edit item sccsus","valid");
+		editLocalStory(editId, grocery.value);
+		cleanDefault();
 	}else {
 		validation("empty value","invalid");
 	}
@@ -36,7 +41,7 @@ function createItem(value, id) {
 	attr.value = id;
 	article.setAttributeNode(attr);
 	article.classList.add("item");
-	article.innerHTML = `<p class="item__title">itme</p>
+	article.innerHTML = `<p class="item__title">${value}</p>
 		                  <div class="item__btns">
 		                    <button type="button" class="item__btn item__btn--edit">
 		                        <i class="fas fa-edit"></i>  
@@ -50,7 +55,7 @@ function createItem(value, id) {
     const editBtn = article.querySelector(".item__btn--edit");
     const deletBtn = article.querySelector(".item__btn--trash");
 
-    // editBtn.addEventListener("click", editElement);
+    editBtn.addEventListener("click", editElementControl);
     deletBtn.addEventListener("click", deletElement);
 }
 
@@ -74,6 +79,7 @@ function clearItem () {
 
 		container.classList.remove("show");
 		validation("clear items", "invalid");
+		localStorage.removeItem("list");
 	}
 }
 
@@ -102,4 +108,69 @@ function deletElement(e) {
 	}
 
 	validation("removed item", "invalid");
+	removeLocalItem(parent.dataset.id);
+}
+function editElementControl(e) {
+	editId = e.currentTarget.parentElement.parentElement.dataset.id;
+	editElement = e.currentTarget.parentElement.previousElementSibling;
+
+	grocery.value = editElement.innerHTML;
+	editToggel = true;
+	submit.innerHTML = "Edit";
+}
+
+function getLocalStorage(){
+	return localStorage.getItem("list")? JSON.parse(localStorage.getItem("list")) : [];
+}
+
+function addToLocalStorage(value, id) {
+	let grocery = {id, value};
+
+	let item = getLocalStorage();
+
+	item.push(grocery);
+
+	localStorage.setItem("list",JSON.stringify(item));
+}
+
+function setUpFromLocal() {
+	let items = getLocalStorage();
+
+	if(items.length > 0) {
+		items.forEach(item => {
+			createItem(item.value, item.id)
+		})
+
+		container.classList.add("show");
+	}
+}
+
+function removeLocalItem(id){
+
+	let items = getLocalStorage();
+
+	items = items.filter((item)=> {
+		if(item.id !== parseInt(id)){
+			return item;
+		}
+	})
+console.log(items)
+	localStorage.setItem("list",JSON.stringify(items));
+
+
+}
+
+function editLocalStory(id,value){
+	let items = getLocalStorage();
+
+	items = items.map(item=>{
+		if(item.id === parseInt(id)){
+			item.value = value;
+		}
+
+		return item;
+	})
+	
+
+	localStorage.setItem("list",JSON.stringify(items));
 }
